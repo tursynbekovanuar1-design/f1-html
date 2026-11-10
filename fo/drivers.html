@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Formula 1 | Drivers</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- jQuery from CDN first, then our script (deferred so the DOM is ready) -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="js/script.js" defer></script>
+</head>
+<body>
+
+<!-- Assignment 6, Task 4: scroll progress bar -->
+<div id="scroll-progress-container">
+    <div id="scroll-progress"></div>
+</div>
+
+<!-- Assignment 6, Task 7: toast notifications -->
+<div id="toast-container" class="toast-container position-fixed bottom-0 end-0 p-3"></div>
+
+<header id="site-header">
+    <nav id="main-nav" class="navbar navbar-expand-lg navbar-dark px-4" aria-label="Main navigation">
+        <div class="container-fluid">
+            <a class="logo" href="index.html">F1 PORTAL</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto gap-3 nav-menu align-items-center">
+                    <li class="nav-item"><a class="nav-link text-light" href="index.html" data-i18n="nav.home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link text-light" href="teams.html" data-i18n="nav.teams">Teams</a></li>
+                    <li class="nav-item"><a class="nav-link active text-white" href="drivers.html" data-i18n="nav.drivers">Drivers</a></li>
+                    <li class="nav-item"><a class="nav-link text-light" href="contact.html" data-i18n="nav.contact">Contact</a></li>
+                    <li class="nav-item">
+                        <select id="lang-select" class="lang-select" aria-label="Language">
+                            <option value="en">EN</option>
+                            <option value="ru">RU</option>
+                            <option value="kk">KZ</option>
+                        </select>
+                    </li>
+                    <li class="nav-item">
+                        <button id="bg-color-btn" class="btn btn-outline-danger btn-sm fw-bold" title="Change background colour" aria-label="Change background colour">🎨</button>
+                    </li>
+                    <li class="nav-item">
+                        <button id="theme-toggle-btn" class="btn btn-outline-danger btn-sm fw-bold">☀️ Day Mode</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<header id="main-header">
+    <h1 class="highlightable" data-i18n="drivers.title">Top Championship Drivers</h1>
+    <div class="mt-3">
+        <button id="open-popup-btn" class="btn btn-danger btn-sm fw-bold" data-i18n="btn.subscribe">Quick Subscribe</button>
+    </div>
+</header>
+
+<main class="main-wide">
+    <section class="mb-4">
+        <div class="position-relative">
+            <input type="text" id="global-search-input" class="form-control border-secondary" placeholder="🔍 Search driver names, titles..." data-i18n-placeholder="search.drivers" aria-label="Search" autocomplete="off">
+            <ul id="autocomplete-list" class="dropdown-menu w-100 border-secondary"></ul>
+        </div>
+    </section>
+
+    <section class="mb-5">
+        <h2 data-i18n="grid.title">The Grid</h2>
+        <figure class="fans-banner">
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="images/drivers-group-abu-dhabi.jpg" width="738" height="405" class="lazy-load  zoomable" alt="All drivers of the season posing together on the track" data-gallery="drivers" data-full="images/drivers-group-abu-dhabi.jpg" tabindex="0" role="button" data-caption-key="cap.grid">
+            <figcaption class="caption-bar" data-i18n="cap.grid">Season finale grid photo, Abu Dhabi Grand Prix 2023</figcaption>
+        </figure>
+    </section>
+
+    <section class="gallery-section mb-5">
+        <h2 data-i18n="gallery.grid">F1 Grand Prix Photo Gallery</h2>
+        <div class="gallery-container">
+            <figure class="gallery-item ">
+                <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="images/podium-champagne.jpg" width="738" height="414" class="lazy-load  zoomable" alt="Drivers spraying champagne on the podium" data-gallery="drivers" data-full="images/podium-champagne.jpg" tabindex="0" role="button" data-caption-key="cap.podium">
+                <figcaption class="caption" data-i18n="cap.podium">Podium celebration</figcaption>
+            </figure>
+            <figure class="gallery-item ">
+                <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="images/checkered-flag.jpg" width="678" height="452" class="lazy-load  zoomable" alt="Red Bull car taking the chequered flag" data-gallery="drivers" data-full="images/checkered-flag.jpg" tabindex="0" role="button" data-caption-key="cap.flag">
+                <figcaption class="caption" data-i18n="cap.flag">Taking the chequered flag</figcaption>
+            </figure>
+            <figure class="gallery-item ">
+                <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="images/monaco.jpg" width="738" height="414" class="lazy-load  zoomable" alt="Cars through the hairpin at Monaco" data-gallery="drivers" data-full="images/monaco.jpg" tabindex="0" role="button" data-caption-key="cap.monaco">
+                <figcaption class="caption" data-i18n="cap.monaco">Monaco Street Circuit</figcaption>
+            </figure>
+            <figure class="gallery-item ">
+                <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="images/race-start.jpg" width="738" height="414" class="lazy-load  zoomable" alt="Cars launching at the start of a Grand Prix" data-gallery="drivers" data-full="images/race-start.jpg" tabindex="0" role="button" data-caption-key="cap.start">
+                <figcaption class="caption" data-i18n="cap.start">Lights out: the Grand Prix start</figcaption>
+            </figure>
+            <figure class="gallery-item ">
+                <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="images/night-sparks.jpg" width="675" height="453" class="lazy-load  zoomable" alt="Car throwing sparks at a night race" data-gallery="drivers" data-full="images/night-sparks.jpg" tabindex="0" role="button" data-caption-key="cap.night2">
+                <figcaption class="caption" data-i18n="cap.night2">Sparks after dark</figcaption>
+            </figure>
+            <figure class="gallery-item ">
+                <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="images/mclaren-pitstop.jpg" width="678" height="452" class="lazy-load  zoomable" alt="McLaren in the pit lane with mechanics waiting" data-gallery="drivers" data-full="images/mclaren-pitstop.jpg" tabindex="0" role="button" data-caption-key="cap.pit">
+                <figcaption class="caption" data-i18n="cap.pit">Pit lane: every tenth counts</figcaption>
+            </figure>
+        </div>
+    </section>
+
+    <section class="mb-5 trophy-section">
+        <figure class="trophy-figure">
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="images/trophy.jpg" width="494" height="619" class="lazy-load  zoomable" alt="The Formula 1 World Championship trophy on a plinth" data-gallery="drivers" data-full="images/trophy.jpg" tabindex="0" role="button" data-caption-key="cap.trophy">
+            <figcaption class="caption-bar" data-i18n="cap.trophy">The World Championship trophy</figcaption>
+        </figure>
+        <div class="trophy-text">
+            <h2 data-i18n="legends.title">Championship Legends</h2>
+        <div class="mb-3">
+            <button id="filter-multi" class="btn btn-outline-danger btn-sm" data-i18n="filter.multi">Filter Multi-Champions</button>
+            <button id="reset-drivers-filter" class="btn btn-outline-light btn-sm ms-2" data-i18n="filter.allDrivers">Show All Drivers</button>
+        </div>
+        <ul id="dynamic-drivers-list" class="list-group bg-transparent"></ul>
+        </div>
+    </section>
+
+    <section class="cards-section mb-4">
+        <h2 data-i18n="profiles.title">Featured Profiles</h2>
+        <div class="row g-4">
+            <div class="col-md-6 searchable-item">
+                <div class="card h-100 theme-card border-secondary p-3">
+                    <h3 class="card-title text-danger fs-5 highlightable">Lewis Hamilton</h3>
+                    <p class="card-text highlightable">103 Race Wins, 7 World Championship Titles. One of the greatest drivers in motorsport history.</p>
+                    <div>
+                        <div class="read-more-content">
+                            <p class="card-text highlightable">Hamilton won his first title with McLaren in 2008 and six more with Mercedes between 2014 and 2020, before moving to Ferrari for 2025.</p>
+                        </div>
+                        <button class="btn btn-outline-danger btn-sm read-more-btn" data-i18n="readmore.more">Read More</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 searchable-item">
+                <div class="card h-100 theme-card border-secondary p-3">
+                    <h3 class="card-title text-danger fs-5 highlightable">Max Verstappen</h3>
+                    <p class="card-text highlightable">3-time consecutive World Champion known for dominant race pace and aggressive overtaking.</p>
+                    <div>
+                        <div class="read-more-content">
+                            <p class="card-text highlightable">Verstappen became the youngest race winner in F1 history at the 2016 Spanish Grand Prix, aged 18.</p>
+                        </div>
+                        <button class="btn btn-outline-danger btn-sm read-more-btn" data-i18n="readmore.more">Read More</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- Assignment 4, Task 3: popup subscription form -->
+<div id="popup-modal" class="popup-overlay" aria-hidden="true">
+    <div class="popup-content" role="dialog" aria-modal="true" aria-labelledby="popup-title">
+        <span id="close-popup-btn" class="close-btn" role="button" tabindex="0" aria-label="Close">&times;</span>
+        <h3 id="popup-title" class="text-danger mb-3" data-i18n="popup.title">Join F1 Newsletter</h3>
+        <p data-i18n="popup.text">Get the latest racing updates directly to your inbox.</p>
+        <form id="subscribe-form" novalidate>
+            <div class="form-field">
+                <input type="email" id="subscribe-email" data-validate="email" placeholder="Enter your email address" data-i18n-placeholder="popup.placeholder" aria-label="Email address">
+                <div class="field-error" role="alert"></div>
+            </div>
+            <button type="submit" class="btn btn-danger w-100 fw-bold" data-i18n="popup.btn">Subscribe Now</button>
+        </form>
+    </div>
+</div>
+
+<!-- Image lightbox (jQuery) -->
+<div id="lightbox" class="lightbox" aria-hidden="true">
+    <button type="button" class="lb-btn lb-close" aria-label="Close">&times;</button>
+    <button type="button" class="lb-btn lb-prev" aria-label="Previous photo">&#10094;</button>
+    <figure class="lb-figure">
+        <img id="lb-img" alt="">
+        <figcaption id="lb-caption"></figcaption>
+    </figure>
+    <button type="button" class="lb-btn lb-next" aria-label="Next photo">&#10095;</button>
+</div>
+
+<footer>
+    <p>&copy; 2026 F1 Educational Portal. All rights reserved. | Developers: <strong>Anuar Tursynbekov</strong> &amp; <strong>Zhanaiym Sadyk</strong></p>
+    <p id="live-clock" class="small mt-1 mb-0 fw-bold"></p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
